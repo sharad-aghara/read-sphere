@@ -1,0 +1,17 @@
+# Ignore application.yml
+read-sphere-server/src/main/resources/application.yml
+read-sphere-server/src/main/resources/application-dev.yml
+
+# Ignore node_modules
+read-sphere-client/node_modules/
+
+# Ignore build outputs
+read-sphere-client/dist/
+read-sphere-server/target/
+
+# Ignore IntelliJ IDEA files
+.idea/
+*.iml
+
+# Ignore logs
+*.log
