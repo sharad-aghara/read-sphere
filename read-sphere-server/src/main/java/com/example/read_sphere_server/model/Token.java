@@ -21,7 +21,7 @@ public class Token {
     private LocalDateTime expiredAt;
     private LocalDateTime validatedAt;
 
-    @ManyToOne
+    @ManyToOne  // Many tokens to one user
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 }
