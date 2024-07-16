@@ -27,7 +27,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles") // mappedBy value must be same as in User mode, there should be not a typo
-    @JsonIgnore
+    @JsonIgnore // to ignore serialization with User -> Role -> User -> Role -> ... till infinite
     private List<User> users;
 
     @CreatedDate
