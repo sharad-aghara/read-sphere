@@ -20,12 +20,11 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("${application-dev.security.jwt.SECRET_KEY}")
+    @Value("${application.security.jwt.SECRET_KEY}")
     private long JWTEXPIRATION;
 
-    @Value("${application-dev.security.jwt.EXPIRATION}")
+    @Value("${application.security.jwt.SECRET_KEY}")
     private String SECRET_KEY;
-
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
