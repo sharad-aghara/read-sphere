@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static jakarta.persistence.FetchType.EAGER;
+
 @Getter
 @Setter
 @Builder
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
 public class User implements UserDetails, Principal {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstname;
     private String lastname;
@@ -37,7 +39,7 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)    // to Eagerly fetch roles
+    @ManyToMany(fetch = EAGER)    // to Eagerly fetch roles
     private List<Role> roles;
 
     @CreatedDate

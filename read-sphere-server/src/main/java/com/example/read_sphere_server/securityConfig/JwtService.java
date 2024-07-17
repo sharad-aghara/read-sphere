@@ -20,8 +20,8 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("${application.security.jwt.SECRET_KEY}")
-    private long JWTEXPIRATION;
+//    @Value("${application.security.jwt.SECRET_KEY}")
+    private long JWTEXPIRATION = 864000;
 
     @Value("${application.security.jwt.SECRET_KEY}")
     private String SECRET_KEY;
