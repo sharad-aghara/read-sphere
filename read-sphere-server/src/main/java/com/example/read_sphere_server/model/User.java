@@ -28,7 +28,7 @@ import static jakarta.persistence.FetchType.EAGER;
 public class User implements UserDetails, Principal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
     private String firstname;
     private String lastname;
