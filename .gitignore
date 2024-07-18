@@ -15,3 +15,5 @@ read-sphere-server/target/
 
 # Ignore logs
 *.log
+
+docker-compose.yml
