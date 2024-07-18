@@ -2,6 +2,7 @@ package com.example.read_sphere_server.auth;
 
 import com.example.read_sphere_server.email.EmailService;
 import com.example.read_sphere_server.email.EmailTemplateName;
+import com.example.read_sphere_server.model.Role;
 import com.example.read_sphere_server.model.Token;
 import com.example.read_sphere_server.model.User;
 import com.example.read_sphere_server.repo.RoleRepo;
@@ -33,6 +34,7 @@ public class AuthenticationService {
     public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new IllegalStateException("ROLE USER is not initialized"));
+//                .orElseGet(() -> roleRepository.save(Role.builder().name("USER").build()));
 
         var user = User.builder()
                 .firstname(request.getFirstname())
