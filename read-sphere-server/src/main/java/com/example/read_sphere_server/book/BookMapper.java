@@ -1,8 +1,9 @@
-package com.example.read_sphere_server.service;
+package com.example.read_sphere_server.book;
 
 import com.example.read_sphere_server.model.Book;
-import com.example.read_sphere_server.requestValidation.BookRequest;
-import com.example.read_sphere_server.responseValidator.BookResponse;
+import com.example.read_sphere_server.book.BookRequest;
+import com.example.read_sphere_server.book.BookResponse;
+import com.example.read_sphere_server.model.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +33,18 @@ public class BookMapper {
                 .shareable(book.isShareable())
                 .owner(book.getOwner().fullname())
 //                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
+                .build();
+    }
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistory) {
+        return BorrowedBookResponse.builder()
+                .id(bookTransactionHistory.getBook().getId())
+                .title(bookTransactionHistory.getBook().getTitle())
+                .authorName(bookTransactionHistory.getBook().getAuthorName())
+                .isbn(bookTransactionHistory.getBook().getIsbn())
+                .rate(bookTransactionHistory.getBook().getRate())
+                .returned(bookTransactionHistory.isReturned())
+                .returnApproved(bookTransactionHistory.isReturnApproved())
                 .build();
     }
 }

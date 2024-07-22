@@ -1,4 +1,4 @@
-package com.example.read_sphere_server.requestValidation;
+package com.example.read_sphere_server.book;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

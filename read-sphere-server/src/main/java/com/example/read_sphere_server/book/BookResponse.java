@@ -1,4 +1,4 @@
-package com.example.read_sphere_server.responseValidator;
+package com.example.read_sphere_server.book;
 
 import lombok.*;
 
