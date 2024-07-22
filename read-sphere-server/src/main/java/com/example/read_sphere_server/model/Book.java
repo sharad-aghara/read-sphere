@@ -24,7 +24,7 @@ public class Book extends BaseModel {
     private String synopsis;
     private String bookCover;
     private boolean archived;
-    private boolean sharable;
+    private boolean shareable;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
