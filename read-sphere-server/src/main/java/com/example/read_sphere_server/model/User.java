@@ -42,6 +42,12 @@ public class User implements UserDetails, Principal {
     @ManyToMany(fetch = EAGER)    // to Eagerly fetch roles
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDate createdDate;
