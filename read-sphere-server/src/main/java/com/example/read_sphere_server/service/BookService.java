@@ -4,6 +4,8 @@ import com.example.read_sphere_server.model.Book;
 import com.example.read_sphere_server.model.User;
 import com.example.read_sphere_server.repo.BookRepository;
 import com.example.read_sphere_server.requestValidation.BookRequest;
+import com.example.read_sphere_server.responseValidator.BookResponse;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,11 @@ public class BookService {
         book.setOwner(user);
 
         return bookRepo.save(book).getId();
+    }
+
+    public BookResponse findById(Integer bookId) {
+        return bookRepo.findById(bookId)
+                .map(bookMapper::toBookResponse)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with boo Id: " + bookId));
     }
 }
