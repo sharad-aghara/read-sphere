@@ -1,5 +1,6 @@
 package com.example.read_sphere_server.book;
 
+import com.example.read_sphere_server.file.FileUtils;
 import com.example.read_sphere_server.model.Book;
 import com.example.read_sphere_server.book.BookRequest;
 import com.example.read_sphere_server.book.BookResponse;
@@ -32,7 +33,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                 .owner(book.getOwner().fullname())
-//                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
