@@ -83,4 +83,28 @@ public class BookController {
     ) throws OperationNotPermittedException {
         return ResponseEntity.ok(bookService.updateArchivedStatus(bookId, connectedUser));
     }
+
+    @PostMapping("/borrow/{book-id}")
+    public ResponseEntity<Integer> borrowBook(
+            @PathVariable("book-id") int bookId,
+            Authentication connectedUser
+    ) {
+        return ResponseEntity.ok(bookService.borrowBook(bookId, connectedUser));
+    }
+
+    @PatchMapping("/borrow/return/{book-id}")
+    public ResponseEntity<Integer> returnBorrowedBook(
+            @PathVariable("book-id") int bookId,
+            Authentication connectedUser
+    ) {
+        return ResponseEntity.ok(bookService.returnBorrowedBook(bookId, connectedUser));
+    }
+
+    @PatchMapping("/borrow/return/approved/{book-id}")
+    public ResponseEntity<Integer> approveReturnBorrowedBook(
+            @PathVariable("book-id") int bookId,
+            Authentication connectedUser
+    ) {
+        return ResponseEntity.ok(bookService.approveReturnBorrowedBook(bookId, connectedUser));
+    }
 }
