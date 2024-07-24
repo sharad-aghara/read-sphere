@@ -27,7 +27,7 @@ import static com.example.read_sphere_server.book.BookSpecification.withOwnerId;
 @RequiredArgsConstructor
 public class BookService {
 
-    private BookRepository bookRepo;
+    private final BookRepository bookRepo;
     private final BookMapper bookMapper;
     private final BookTransactionHistoryRepo bookTransactionHistoryRepo;
     private final FileStorageService fileStorageService;

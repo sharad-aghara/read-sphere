@@ -17,21 +17,21 @@ import org.springframework.web.multipart.MultipartFile;
 @Tag(name = "book")
 public class BookController {
 
-    private final BookService bookService;
+    private final BookService service;
 
     @PostMapping
     public ResponseEntity<Integer> saveBook(
             @RequestBody @Valid BookRequest request,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.save(request, connectedUser));
+        return ResponseEntity.ok(service.save(request, connectedUser));
     }
 
     @GetMapping("{book-id}")
     public ResponseEntity<BookResponse> findBookById(
             @PathVariable("book-id") Integer bookId
     ) {
-        return ResponseEntity.ok(bookService.findById(bookId));
+        return ResponseEntity.ok(service.findById(bookId));
     }
 
     @GetMapping
@@ -40,7 +40,7 @@ public class BookController {
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.findAllBooks(page, size, connectedUser));
+        return ResponseEntity.ok(service.findAllBooks(page, size, connectedUser));
     }
 
     @GetMapping("/owner")
@@ -49,7 +49,7 @@ public class BookController {
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.findAllBooksByOwner(page, size, connectedUser));
+        return ResponseEntity.ok(service.findAllBooksByOwner(page, size, connectedUser));
     }
 
     @GetMapping("/borrowed")
@@ -58,7 +58,7 @@ public class BookController {
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.findAllBorrowedBooks(page, size, connectedUser));
+        return ResponseEntity.ok(service.findAllBorrowedBooks(page, size, connectedUser));
     }
 
     @GetMapping("/returned")
@@ -67,7 +67,7 @@ public class BookController {
             @RequestParam(name = "size", defaultValue = "10", required = false) int size,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.findAllReturnedBooks(page, size, connectedUser));
+        return ResponseEntity.ok(service.findAllReturnedBooks(page, size, connectedUser));
     }
 
     @PatchMapping("/shareable/{book-id}")
@@ -75,7 +75,7 @@ public class BookController {
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
     ) throws OperationNotPermittedException {
-        return ResponseEntity.ok(bookService.updateShareableStatus(bookId, connectedUser));
+        return ResponseEntity.ok(service.updateShareableStatus(bookId, connectedUser));
     }
 
     @PatchMapping("/archived/{book-id}")
@@ -83,7 +83,7 @@ public class BookController {
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
     ) throws OperationNotPermittedException {
-        return ResponseEntity.ok(bookService.updateArchivedStatus(bookId, connectedUser));
+        return ResponseEntity.ok(service.updateArchivedStatus(bookId, connectedUser));
     }
 
     @PostMapping("/borrow/{book-id}")
@@ -91,7 +91,7 @@ public class BookController {
             @PathVariable("book-id") int bookId,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.borrowBook(bookId, connectedUser));
+        return ResponseEntity.ok(service.borrowBook(bookId, connectedUser));
     }
 
     @PatchMapping("/borrow/return/{book-id}")
@@ -99,7 +99,7 @@ public class BookController {
             @PathVariable("book-id") int bookId,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.returnBorrowedBook(bookId, connectedUser));
+        return ResponseEntity.ok(service.returnBorrowedBook(bookId, connectedUser));
     }
 
     @PatchMapping("/borrow/return/approved/{book-id}")
@@ -107,7 +107,7 @@ public class BookController {
             @PathVariable("book-id") int bookId,
             Authentication connectedUser
     ) {
-        return ResponseEntity.ok(bookService.approveReturnBorrowedBook(bookId, connectedUser));
+        return ResponseEntity.ok(service.approveReturnBorrowedBook(bookId, connectedUser));
     }
 
     @PostMapping(value = "/cover/{book-id}", consumes = "multipart/form-data")
@@ -117,7 +117,7 @@ public class BookController {
             @RequestPart("file") MultipartFile file,
             Authentication connectedUser
     ) {
-        bookService.uploadBookCoverPicture(file, connectedUser, bookId);
+        service.uploadBookCoverPicture(file, connectedUser, bookId);
         return ResponseEntity.accepted().build();
     }
 }

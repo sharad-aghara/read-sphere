@@ -2,9 +2,11 @@ package com.example.read_sphere_server.feedback;
 
 import com.example.read_sphere_server.model.Book;
 import com.example.read_sphere_server.model.Feedback;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class FeedbackMapper {
     public Feedback tofeedback(FeedbackRequest request) {
         return Feedback.builder()
