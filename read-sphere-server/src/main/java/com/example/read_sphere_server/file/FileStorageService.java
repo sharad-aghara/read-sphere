@@ -1,6 +1,5 @@
 package com.example.read_sphere_server.file;
 
-import com.example.read_sphere_server.model.Book;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
