@@ -11,7 +11,7 @@ public interface FeedbackRepo extends JpaRepository<Feedback, Integer> {
     @Query("""
             SELECT feedback
             FROM Feedback feedback
-            WHERE feedback.book.id = :bookid
+            WHERE feedback.book.id = :bookId
             """)
     Page<Feedback> findAllbyBookId(int bookId, Pageable pageable);
 }
