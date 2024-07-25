@@ -1,5 +1,6 @@
 package com.example.read_sphere_server.handler;
 
+import com.example.read_sphere_server.exception.ActivationTokenException;
 import com.example.read_sphere_server.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,9 @@ public class GlobalExceptionHandler {
                 .status(UNAUTHORIZED)
                 .body(
                         ExceptionResponse.builder()
-                                .errorCode(NO_CODE.getCode())
-                                .errorDescription(NO_CODE.getDescription())
+                                .errorCode(ACCOUNT_LOCKED.getCode())
+                                .errorDescription(ACCOUNT_LOCKED.getDescription())
+                                .error(exp.getMessage())
                                 .build()
                 );
     }
@@ -39,18 +41,20 @@ public class GlobalExceptionHandler {
                         ExceptionResponse.builder()
                                 .errorCode(ACCOUNT_DISABLED.getCode())
                                 .errorDescription(ACCOUNT_DISABLED.getDescription())
+                                .error(exp.getMessage())
                                 .build()
                 );
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ExceptionResponse> handleException(BadCredentialsException exp) {
+    public ResponseEntity<ExceptionResponse> handleException() {
         return ResponseEntity
                 .status(UNAUTHORIZED)
                 .body(
                         ExceptionResponse.builder()
                                 .errorCode(BAD_CREDENTIALS.getCode())
                                 .errorDescription(BAD_CREDENTIALS.getDescription())
+                                .error("Login / Password is incorrect!")
                                 .build()
                 );
     }
@@ -58,7 +62,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MessagingException.class)
     public ResponseEntity<ExceptionResponse> handleException(MessagingException exp) {
         return ResponseEntity
-                .status(UNAUTHORIZED)
+                .status(INTERNAL_SERVER_ERROR)
+                .body(
+                        ExceptionResponse.builder()
+                                .error(exp.getMessage())
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(ActivationTokenException.class)
+    public ResponseEntity<ExceptionResponse> handleException(ActivationTokenException exp) {
+        return ResponseEntity
+                .status(BAD_REQUEST)
                 .body(
                         ExceptionResponse.builder()
                                 .error(exp.getMessage())
@@ -106,9 +121,10 @@ public class GlobalExceptionHandler {
         exp.printStackTrace();
 
         return ResponseEntity
-                .status(BAD_REQUEST)
+                .status(INTERNAL_SERVER_ERROR)
                 .body(
                         ExceptionResponse.builder()
+                                .errorDescription("Internal error, please contact the admin")
                                 .error(exp.getMessage())
                                 .build()
                 );
