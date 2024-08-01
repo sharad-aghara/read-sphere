@@ -20,7 +20,7 @@ import static java.io.File.separator;
 public class FileStorageService {
 
     @Value("${application.file.uploads.photos-output-path}")
-    private String fileUploadSubPath;
+    private String fileUploadPath;
 
     public String saveFile(
             @NotNull MultipartFile sourceFile,
@@ -35,9 +35,9 @@ public class FileStorageService {
             @NotNull MultipartFile sourceFile,
             @NotNull String fileUploadSubPath
     ) {
-        final String finalUploadPath = fileUploadSubPath + separator +fileUploadSubPath;
+        final String finalUploadPath = fileUploadPath + separator + fileUploadSubPath;
         File targetFolder = new File(finalUploadPath);
-        if(!targetFolder.exists()) {
+        if (!targetFolder.exists()) {
             boolean folderCreated = targetFolder.mkdirs();
             if (!folderCreated) {
                 log.warn("Failed to create target folder");
@@ -53,7 +53,7 @@ public class FileStorageService {
 
         try {
             Files.write(targetPath, sourceFile.getBytes());
-            log.info("File saved.");
+            log.info("File saved." + targetFilePath);
         } catch (Exception e) {
             log.error("File was not saved: " + e);
         }
