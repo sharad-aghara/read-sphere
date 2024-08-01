@@ -17,3 +17,5 @@ read-sphere-server/target/
 *.log
 
 docker-compose.yml
+
+users
