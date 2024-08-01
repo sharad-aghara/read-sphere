@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import { HttpClient, HttpContext } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export class AuthenticationService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   register$Response(params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
+  }>> {
     return register(this.http, this.rootUrl, params, context);
   }
 
@@ -44,11 +44,11 @@ export class AuthenticationService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   register(params: Register$Params, context?: HttpContext): Observable<{
-}> {
+  }> {
     return this.register$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
-}>): {
-} => r.body)
+      }>): {
+        } => r.body)
     );
   }
 
@@ -61,8 +61,22 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authenticate$Response(params: Authenticate$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
-    return authenticate(this.http, this.rootUrl, params, context);
+  // authenticate$Response(params: Authenticate$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
+  //   return authenticate(this.http, this.rootUrl, params, context);
+  // }
+
+  authenticate$Response(params: Authenticate$Params, context?: HttpContext): Observable<HttpResponse<AuthenticationResponse>> {
+    return this.http.post<AuthenticationResponse>(
+      `${this.rootUrl}${AuthenticationService.AuthenticatePath}`,
+      params.body,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        observe: 'response',
+        context
+      }
+    );
   }
 
   /**
@@ -71,10 +85,16 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
+  // authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthenticationResponse> {
+  //   return this.authenticate$Response(params, context).pipe(
+  //     map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
+  //   );
+
   authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthenticationResponse> {
     return this.authenticate$Response(params, context).pipe(
-      map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
+      map((r: HttpResponse<AuthenticationResponse>) => r.body as AuthenticationResponse)
     );
+
   }
 
   /** Path part for operation `confirm()` */

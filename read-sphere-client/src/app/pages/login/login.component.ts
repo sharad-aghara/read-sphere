@@ -35,6 +35,10 @@ export class LoginComponent {
       }
     ).subscribe({
       next: (res) => {
+
+        // Log the entire response to debug
+        console.log('Authentication response:', res);
+        
         this.tokenService.token = res.token as string;
         console.log("token: ", localStorage.getItem('token'));
         // this.router.navigate(['books']);
