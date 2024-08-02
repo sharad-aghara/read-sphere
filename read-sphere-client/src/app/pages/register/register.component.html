@@ -1,1 +1,56 @@
-<p>register works!</p>
+<div class="min-h-screen flex items-center justify-center bg-white">
+    <div class="w-full max-w-md bg-white p-8 border-2 border-gray-800">
+        <h2 class="text-2xl font-bold mb-8 text-center text-black underline">Register</h2>
+
+        <div *ngIf="errorMsg.length" class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+            role="alert">
+            <p *ngFor="let msg of errorMsg" class="block sm:inline">{{ msg }}</p>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-black text-sm font-bold mb-2" for="email">Email</label>
+            <input [(ngModel)]="registerRequest.email" type="email" id="email"
+                class="shadow appearance-none border-2 border-gray-800 w-full py-2 px-3 text-black leading-tight focus:outline-none focus:border-black"
+                placeholder="name@examplemail.com">
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-black text-sm font-bold mb-2" for="firstname">First Name</label>
+            <input [(ngModel)]="registerRequest.firstname" type="text" id="firstname"
+                class="shadow appearance-none border-2 border-gray-800 w-full py-2 px-3 text-black leading-tight focus:outline-none focus:border-black"
+                placeholder="First Name">
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-black text-sm font-bold mb-2" for="lastname">Last Name</label>
+            <input [(ngModel)]="registerRequest.lastname" type="text" id="lastname"
+                class="shadow appearance-none border-2 border-gray-800 w-full py-2 px-3 text-black leading-tight focus:outline-none focus:border-black"
+                placeholder="Last Name">
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-black text-sm font-bold mb-2" for="password">Password</label>
+            <input [(ngModel)]="registerRequest.password" type="password" id="password"
+                class="shadow appearance-none border-2 border-gray-800 w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:border-black"
+                placeholder="******">
+        </div>
+
+        <div class="flex items-center justify-between mb-4">
+            <button (click)="register()"
+                class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                type="submit">
+                Sign Up
+            </button>
+        </div>
+
+        <div class="mt-6 text-center">
+            <p class="block text-black text-sm font-bold mb-2">Already have an account?
+                <button (click)="login()"
+                    class="bg-white hover:bg-gray-800 hover:text-white text-black font-bold py-2 px-4 focus:outline-none focus:shadow-outline underline"
+                    type="button">
+                    Login
+                </button>
+            </p>
+        </div>
+    </div>
+</div>
