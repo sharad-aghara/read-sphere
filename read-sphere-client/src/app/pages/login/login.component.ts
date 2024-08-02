@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationRequest } from '../../services/models/authentication-request';
 import { Router } from '@angular/router';
+import { AuthenticationRequest } from '../../services/models/authentication-request';
 import { AuthenticationService } from '../../services/services/authentication.service';
 import { TokenService } from '../../services/token/token.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +52,11 @@ export class LoginComponent {
     })
   }
 
+  activateAccount() {
+    this.router.navigate(['activate-account']);
+  }
+
   register() {
-    this.router.navigate(['register'])
+    this.router.navigate(['register']);
   }
 }
