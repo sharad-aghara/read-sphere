@@ -5,17 +5,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
+import { BaseService } from '../base-service';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { authenticate } from '../fn/authentication/authenticate';
 import { Authenticate$Params } from '../fn/authentication/authenticate';
+import { confirm, Confirm$Params } from '../fn/authentication/confirm';
+import { register, Register$Params } from '../fn/authentication/register';
 import { AuthenticationResponse } from '../models/authentication-response';
-import { confirm } from '../fn/authentication/confirm';
-import { Confirm$Params } from '../fn/authentication/confirm';
-import { register } from '../fn/authentication/register';
-import { Register$Params } from '../fn/authentication/register';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
