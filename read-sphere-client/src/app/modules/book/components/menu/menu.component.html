@@ -1,0 +1,57 @@
+<nav class="bg-white border-gray-800 border-b-2">
+    <div class="container mx-auto flex justify-between items-center py-4">
+        <a class="text-black font-bold text-xl" href="javascript:void(0)">Read-Sphere</a>
+        <button class="text-black lg:hidden" id="navbar-toggler">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="w-full lg:flex lg:items-center lg:w-auto hidden" id="navbar-content">
+            <ul class="lg:flex lg:space-x-4 lg:mt-0 mt-4">
+                <li class="nav-item">
+                    <a class="nav-link text-black" routerLink="/books">Home
+                        <!-- <i class="fas fa-home-alt"></i>&nbsp;Home -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" routerLink="/my-books">My Books
+                        <!-- <i class="fas fa-book"></i>&nbsp;My Books -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" routerLink="/my-waiting-list">My Waiting List
+                        <!-- <i class="fas fa-heart"></i>&nbsp;My Waiting List -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" routerLink="/my-returned-books">My Returned Books
+                        <!-- <i class="fa-solid fa-truck-fast"></i>&nbsp;My Returned Books -->
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black" routerLink="/my-borrowed-books">Borrowed Books
+                        <!-- <i class="fas fa-list-check"></i>&nbsp;Borrowed Books -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <form class="flex gap-2 items-center mt-4 lg:mt-0">
+                <input class="form-input border-2 border-gray-800 py-1 px-2 text-black" type="search"
+                    placeholder="Find a book" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                <span class="text-black">Welcome,</span>
+                <span class="text-black font-bold capitalize">User</span>
+                <button (click)="logout()"
+                    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 mx-2 focus:outline-none focus:shadow-outline"
+                    type="submit">
+                    Logout
+                </button>
+                <!-- <button class="btn btn-link text-black" type="button" (click)="logout()">
+                    <i class="fas fa-door-open"></i>
+                </button> -->
+            </form>
+        </div>
+    </div>
+</nav>
