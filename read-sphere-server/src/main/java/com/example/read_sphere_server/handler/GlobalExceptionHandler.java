@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
                         ExceptionResponse.builder()
                                 .errorCode(BAD_CREDENTIALS.getCode())
                                 .errorDescription(BAD_CREDENTIALS.getDescription())
-                                .error("Login / Password is incorrect!")
+                                .error("Email / Password is incorrect!")
                                 .build()
                 );
     }
