@@ -34,11 +34,7 @@ export class LoginComponent {
         body: this.authRequest
       }
     ).subscribe({
-      next: (res) => {
-
-        // Log the entire response to debug
-        console.log('Authentication response:', res);
-        
+      next: (res) => {        
         this.tokenService.token = res.token as string;
         console.log("token: ", localStorage.getItem('token'));
         // this.router.navigate(['books']);
@@ -49,7 +45,8 @@ export class LoginComponent {
           if (err.error.validationErrors) {
             this.errorMsg = err.error.validationErrors;
           } else {
-            this.errorMsg.push("Error at login.component.ts 38-48");
+            console.log(err.error)
+            this.errorMsg.push(err.error.errorMsg ? err.error.errorMsg : err.error.errorDescription);
           }
         }
 
