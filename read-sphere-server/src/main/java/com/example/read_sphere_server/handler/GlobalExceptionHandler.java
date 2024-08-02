@@ -3,6 +3,7 @@ package com.example.read_sphere_server.handler;
 import com.example.read_sphere_server.exception.ActivationTokenException;
 import com.example.read_sphere_server.exception.OperationNotPermittedException;
 import jakarta.mail.MessagingException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -24,6 +25,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException(LockedException exp) {
         return ResponseEntity
                 .status(UNAUTHORIZED)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .errorCode(ACCOUNT_LOCKED.getCode())
@@ -37,6 +39,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException(DisabledException exp) {
         return ResponseEntity
                 .status(UNAUTHORIZED)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .errorCode(ACCOUNT_DISABLED.getCode())
@@ -50,6 +53,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException() {
         return ResponseEntity
                 .status(UNAUTHORIZED)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .errorCode(BAD_CREDENTIALS.getCode())
@@ -63,6 +67,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException(MessagingException exp) {
         return ResponseEntity
                 .status(INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .error(exp.getMessage())
@@ -74,6 +79,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleException(ActivationTokenException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .error(exp.getMessage())
@@ -93,6 +99,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .validationErrors(errors)
@@ -107,6 +114,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .errorDescription("Internal server error, contact admin")
@@ -122,6 +130,7 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity
                 .status(INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .errorDescription("Internal error, please contact the admin")
