@@ -35,7 +35,7 @@ export class LoginComponent {
     ).subscribe({
       next: (res) => {
         this.tokenService.token = res.token as string;
-        console.log("token: ", localStorage.getItem('token'));
+        // console.log("token: ", localStorage.getItem('token'));
         this.router.navigate(['books']);
       },
 
