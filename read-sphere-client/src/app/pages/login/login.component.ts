@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { TokenService } from '../../services/token/token.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   // providers: [provideHttpClient()]
@@ -33,21 +33,21 @@ export class LoginComponent {
         body: this.authRequest
       }
     ).subscribe({
-      next: (res) => {        
+      next: (res) => {
         this.tokenService.token = res.token as string;
         console.log("token: ", localStorage.getItem('token'));
-        // this.router.navigate(['books']);
+        this.router.navigate(['books']);
       },
 
       error: (err) => {
-          console.log(err);
-          if (err.error.validationErrors) {
-            this.errorMsg = err.error.validationErrors;
-          } else {
-            console.log(err.error)
-            this.errorMsg.push(err.error.errorMsg ? err.error.errorMsg : err.error.errorDescription);
-          }
+        console.log(err);
+        if (err.error.validationErrors) {
+          this.errorMsg = err.error.validationErrors;
+        } else {
+          console.log(err.error)
+          this.errorMsg.push(err.error.errorMsg ? err.error.errorMsg : err.error.errorDescription);
         }
+      }
 
     })
   }
