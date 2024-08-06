@@ -1,23 +1,23 @@
-<div class="min-h-screen flex items-center justify-center bg-white" *ngIf="submitted else codeForm">
-    <div class="w-full max-w-md bg-white p-8 border-2 border-gray-800">
+<div class="min-h-screen flex items-center justify-center bg-gray-900" *ngIf="submitted else codeForm">
+    <div class="w-full max-w-md bg-gray-800 p-8 border-2 border-gray-600">
 
         <div class="activation-message" *ngIf="isOkay; else activationError">
-            <h2 class="text-2xl font-bold mb-8 text-center text-black underline">Activation Successful!</h2>
-            <p class="text-black text-center mb-4">Your account has been successfully activated.</p>
+            <h2 class="text-2xl font-bold mb-8 text-center text-white underline">Activation Successful!</h2>
+            <p class="text-white text-center mb-4">Your account has been successfully activated.</p>
             <div class="flex items-center justify-center">
                 <button
-                    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                    class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                     (click)="redirectToLogin()">Go to Login</button>
             </div>
         </div>
 
         <ng-template #activationError>
             <div class="activation-error">
-                <h2 class="text-2xl font-bold mb-8 text-center text-black underline">Activation Failed!</h2>
-                <p class="text-black text-center mb-4">{{ message }}</p>
+                <h2 class="text-2xl font-bold mb-8 text-center text-white underline">Activation Failed!</h2>
+                <p class="text-white text-center mb-4">{{ message }}</p>
                 <div class="flex items-center justify-center">
                     <button
-                        class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                        class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                         (click)="submitted = false">Try again</button>
                 </div>
             </div>
@@ -26,17 +26,18 @@
 </div>
 
 <ng-template #codeForm>
-    <div class="min-h-screen flex items-center justify-center bg-white">
-        <div class="w-full max-w-md bg-white p-8 border-2 border-gray-800">
-            <h2 class="text-2xl font-bold mb-8 text-center text-black underline">Type your activation code</h2>
-            <div class="mb-6">
+    <div class="min-h-screen flex items-center justify-center bg-gray-900">
+        <div class="w-full max-w-md bg-gray-800 p-8 border-2 border-gray-600">
+            <h2 class="text-2xl font-bold mb-8 text-center text-white underline">Type your activation code</h2>
+            <div class="mb-6 bg-white">
                 <code-input [isCodeHidden]="false" [codeLength]="6" [code]="'number'"
-                    (codeCompleted)="onCodeCompleted($event)">
+                    (codeCompleted)="onCodeCompleted($event)"
+                    class="shadow appearance-none border-2 border-gray-600 w-full py-2 px-3  leading-tight focus:outline-none focus:border-white">
                 </code-input>
             </div>
             <div class="flex items-center justify-center">
                 <button
-                    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                    class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                     (click)="redirectToLogin()">Go to Login</button>
             </div>
         </div>
