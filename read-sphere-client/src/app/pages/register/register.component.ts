@@ -22,7 +22,7 @@ export class RegisterComponent {
     private authService: AuthenticationService
   ) {
   }
-  
+
   login() {
     this.router.navigate(['login']);
   }
@@ -32,13 +32,23 @@ export class RegisterComponent {
     this.authService.register({
       body: this.registerRequest
     })
-    .subscribe({
-      next: () => {
-        this.router.navigate(['activate-account']);
-      },
-      error: (err) => {
-        this.errorMsg = err.error.validationErrors;
-      }
-    })
+      .subscribe({
+        next: () => {
+          this.router.navigate(['activate-account']);
+        },
+        
+        error: (err) => {
+          console.log("A rororrororororo", err);
+          if (err.error.validationErrors) {
+            this.errorMsg = err.error.validationErrors;
+            console.log("error: ", this.errorMsg)
+          } else {
+            console.log("ERRORRRRRRRR", err.error.errorMsg);
+            this.errorMsg.push(err.error.errorMsg ? err.error.errorMsg : err.error.errorDescription);
+            this.errorMsg.push("Error!");
+          }
+        }
+
+      })
   }
 }
