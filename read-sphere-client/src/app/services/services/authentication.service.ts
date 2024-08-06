@@ -29,9 +29,23 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  register$Response(params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-  }>> {
-    return register(this.http, this.rootUrl, params, context);
+  // register$Response(params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  // }>> {
+  //   return register(this.http, this.rootUrl, params, context);
+  // }
+
+  register$Response(params: Register$Params, context?: HttpContext): Observable<HttpResponse<string>> {
+    return this.http.post<string>(
+      `${this.rootUrl}`, // Update this with the correct endpoint if needed
+      params.body,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        observe: 'response',
+        context
+      }
+    );
   }
 
   /**
@@ -40,14 +54,21 @@ export class AuthenticationService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  register(params: Register$Params, context?: HttpContext): Observable<{
-  }> {
+  // register(params: Register$Params, context?: HttpContext): Observable<{
+  // }> {
+  //   return this.register$Response(params, context).pipe(
+  //     map((r: StrictHttpResponse<{
+  //     }>): {
+  //       } => r.body)
+  //   );
+  // }
+
+  register(params: Register$Params, context?: HttpContext): Observable<string> {
     return this.register$Response(params, context).pipe(
-      map((r: StrictHttpResponse<{
-      }>): {
-        } => r.body)
+      map((r: HttpResponse<string>) => r.body as string)
     );
   }
+  
 
   /** Path part for operation `authenticate()` */
   static readonly AuthenticatePath = '/auth/authenticate';
